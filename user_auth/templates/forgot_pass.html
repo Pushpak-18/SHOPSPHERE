@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/forgot_pass.css' %}">{% endblock %}
+{% block content %}
+<center>
+    <h1>Forgot password</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if error %}<div style="background:rgba(255,101,132,0.1);border:1px solid rgba(255,101,132,0.3);border-radius:8px;padding:12px 16px;font-size:0.85rem;color:#ff8fa3;">{{ error }}</div>{% endif %}
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="your_username">
+        <button type="submit">Send Reset Link</button>
+    </form>
+    <a href="{% url 'login_' %}" style="margin-top:16px;font-size:0.85rem;color:var(--text-muted);text-decoration:none;">← Back to Sign In</a>
+</center>
+{% endblock %}

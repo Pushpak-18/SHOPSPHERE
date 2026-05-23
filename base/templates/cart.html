@@ -1,0 +1,86 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-page">
+
+    <!-- HEADER -->
+    <div class="cart-header">
+        <div>
+            <h1>Your Cart</h1>
+            <p>{{ cartproducts_count }} item{{ cartproducts_count|pluralize }} in your bag</p>
+        </div>
+        <a class="continue-shopping" href="{% url 'home' %}">← Continue Shopping</a>
+    </div>
+
+    {% if cartproducts %}
+
+    <!-- ITEMS -->
+    <div class="cart-items">
+        {% for i in cartproducts %}
+        <div class="cart-item">
+            <div class="item-number">{{ forloop.counter }}</div>
+
+            <div class="item-info">
+                <p class="item-name">{{ i.pname }}</p>
+                <p class="item-category">{{ i.pcategory }}</p>
+            </div>
+
+            <div class="item-price-col">
+                <p class="col-label">Price</p>
+                <p class="col-val">₹{{ i.price }}</p>
+            </div>
+
+            <div class="qty-controls">
+                <a class="qty-btn" href="{% url 'decrement' i.id %}">−</a>
+                <span class="qty-value">{{ i.quantity }}</span>
+                <a class="qty-btn" href="{% url 'increment' i.id %}">+</a>
+            </div>
+
+            <div class="item-total-col">
+                <p class="col-label">Total</p>
+                <p class="col-val">₹{{ i.totalprice }}</p>
+            </div>
+
+            <a class="remove-btn" href="{% url 'remove' i.id %}">✕</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+            <span class="s-label">Subtotal</span>
+            <span class="s-val">₹{{ TA }}</span>
+        </div>
+        <div class="summary-row">
+            <span class="s-label">Shipping</span>
+            <span class="s-val free">Free</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-total">
+            <span class="s-label">Total</span>
+            <span class="s-val">₹{{ TA }}</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY -->
+    <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything yet.</p>
+        <a class="start-shopping-btn" href="{% url 'home' %}">Start Shopping</a>
+    </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

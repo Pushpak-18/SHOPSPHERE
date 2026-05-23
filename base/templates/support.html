@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/support.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1>Support Center</h1>
+        <p>We're here to help. Reach out to us anytime.</p>
+    </div>
+
+    <div class="support-grid">
+
+        <div class="support-card">
+            <div class="support-icon">📧</div>
+            <h3>Email Us</h3>
+            <p>Send us an email and we'll get back to you within 24 hours.</p>
+            <a href="mailto:support@shopsphere.com" class="support-link">support@shopsphere.com</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon">💬</div>
+            <h3>Live Chat</h3>
+            <p>Chat with our support team in real time during business hours.</p>
+            <a href="#" class="support-link">Start Chat</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon">📞</div>
+            <h3>Call Us</h3>
+            <p>Available Monday to Saturday, 9am – 6pm IST.</p>
+            <a href="tel:+911234567890" class="support-link">+91 12345 67890</a>
+        </div>
+
+    </div>
+
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h4>How do I track my order?</h4>
+            <p>Once your order is placed, you'll receive a confirmation email with a tracking link.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What is your return policy?</h4>
+            <p>We offer a 7-day easy return policy on all products. No questions asked.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>How long does delivery take?</h4>
+            <p>Standard delivery takes 3–5 business days depending on your location.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Can I change or cancel my order?</h4>
+            <p>Orders can be modified or cancelled within 12 hours of placement.</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

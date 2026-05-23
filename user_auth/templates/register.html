@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/register.css' %}">{% endblock %}
+{% block content %}
+<center>
+    <h1>Create account</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if error %}<div style="background:rgba(255,101,132,0.1);border:1px solid rgba(255,101,132,0.3);border-radius:8px;padding:12px 16px;font-size:0.85rem;color:#ff8fa3;">{{ error }}</div>{% endif %}
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname" placeholder="Jane">
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname" placeholder="Doe">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="jane@example.com">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="janedoe">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="••••••••">
+        <button type="submit">Create Account</button>
+    </form>
+    <a href="{% url 'login_' %}" style="margin-top:16px;font-size:0.85rem;color:var(--text-muted);text-decoration:none;">Already have an account? <span style="color:var(--accent-light);">Sign in →</span></a>
+</center>
+{% endblock %}

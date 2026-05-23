@@ -1,0 +1,8 @@
+/* profile page — styles live in style.css under .profile-card etc */
+.profile-page-wrap {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}

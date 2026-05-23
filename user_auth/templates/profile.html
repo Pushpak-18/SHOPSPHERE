@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">{% endblock %}
+{% block content %}
+<div class="profile-page-wrap">
+    <div class="profile-card">
+        <div class="profile-avatar">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+        </div>
+        <div class="profile-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+        <div class="profile-badge">
+            {% if request.user.is_authenticated %}
+            <span class="badge verified">✓ Verified Member</span>
+            {% else %}
+            <span class="badge">Guest</span>
+            {% endif %}
+        </div>
+        <div class="profile-info-row"><span class="profile-info-label">Username</span><span
+                class="profile-info-value">{{ request.user.username }}</span></div>
+        <div class="profile-info-row"><span class="profile-info-label">Email</span><span class="profile-info-value">{{
+                request.user.email }}</span></div>
+        <div class="profile-info-row"><span class="profile-info-label">First Name</span><span
+                class="profile-info-value">{{ request.user.first_name }}</span></div>
+        <div class="profile-info-row"><span class="profile-info-label">Last Name</span><span
+                class="profile-info-value">{{ request.user.last_name }}</span></div>
+        <div class="profile-actions">
+            <a href="{% url 'reset_password' %}" class="btn-outline">🔑 Reset Password</a>
+            <a href="{% url 'update_profile' %}" class="btn-outline">✏️ Edit Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

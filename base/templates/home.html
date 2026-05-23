@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- SEARCH -->
+<!-- SEARCH -->
+<div class="search-section">
+    <div class="search-row">
+        <div class="search-glow-wrap">
+            <form class="search-form" method="GET" action="{% url 'home' %}">
+                <input class="search-input" type="text" name="search" placeholder="Search products..." value="{{ request.GET.search }}">
+                <button class="search-btn" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+            </form>
+        </div>
+        {% if request.user.is_authenticated %}
+        <a class="cart-badge-link" href="{% url 'cart' %}">
+            🛒 Cart
+            {% if cartproducts_count %}
+                <span class="cart-count-bubble">{{ cartproducts_count }}</span>
+            {% endif %}
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-strip">
+    <a class="filter-chip" href="{% url 'home' %}">All</a>
+    <a class="filter-chip {% if trending %}active-trending{% endif %}" href="?trending">🔥 Trending</a>
+    <a class="filter-chip {% if offer %}active-offer{% endif %}" href="?offer">🏷 Offers</a>
+    {% for i in category %}
+        <a class="filter-chip" href="?cat={{ i }}">{{ i }}</a>
+    {% endfor %}
+</div>
+
+ 
+
+<!-- NO MATCH -->
+{% if no_match %}
+<div class="no-match">
+    <div class="no-match-icon">🔍</div>
+    <h2>No Products Found</h2>
+    <p>Try a different search term or browse categories above.</p>
+</div>
+{% endif %}
+
+<!-- PRODUCTS GRID -->
+<div class="products-grid">
+    {% for i in all_products %}
+    <div class="product-card">
+
+        <!-- BADGES -->
+        <div class="product-badges">
+            {% if i.trending %}<span class="badge-trending">🔥 Trending</span>{% endif %}
+            {% if i.offer %}<span class="badge-offer">🏷 Offer</span>{% endif %}
+        </div>
+
+        <!-- IMAGE -->
+        <div class="product-img-wrap">
+            <img src="{{ i.pimage.url }}" alt="{{ i.pname }}">
+        </div>
+
+        <!-- INFO -->
+        <div class="product-info">
+            <p class="product-category">{{ i.pcategory }}</p>
+            <h3 class="product-name">{{ i.pname }}</h3>
+            <p class="product-desc">{{ i.pdesc }}</p>
+            <div class="product-footer">
+                <span class="product-price">₹{{ i.price }}</span>
+                <a class="add-to-cart-btn" href="{% url 'addtocart' i.id %}">+ Cart</a>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
